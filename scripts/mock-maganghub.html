@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>Riwayat | MagangHub (tiruan untuk screenshot)</title>
+<style>
+  body{font-family:Inter,system-ui,sans-serif;background:#f5f7fb;margin:0;color:#1f2937}
+  .wrap{max-width:770px;margin:0 auto;padding:28px 16px 120px}
+  h1{font-size:30px;margin:0 0 4px}.sub{color:#6b7280;margin:0 0 18px}
+  .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:16px}
+  .period{display:flex;align-items:center;justify-content:space-between;font-weight:700}.period small{display:block;font-weight:400;color:#6b7280}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:14px}.dow{text-align:center;font-weight:700;color:#374151;padding:8px 0}
+  .cell{height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px solid #eef0f4;background:#fff}
+  .cell.off{background:#f3f4f6}.n{font-size:14px;color:#374151}.today{border:2px solid #2563eb;border-radius:50%;width:26px;height:26px;display:grid;place-items:center}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:13px;font-weight:600}
+  .MuiFormControl-root{display:grid;gap:4px;margin:12px 0}label{font-size:14px;color:#374151}textarea{width:100%;min-height:84px;border:1px solid #ef4444;border-radius:8px;padding:10px;font:inherit;box-sizing:border-box}
+  .btn{background:#93c5fd;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:700}.btn.g{background:#fff;color:#2563eb;border:1px solid #2563eb}
+  .time{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:#fff;border-radius:999px;padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:13px}
+  nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:10px 0;font-size:12px;color:#6b7280}
+</style></head><body>
+<div class="wrap">
+  <h1>Riwayat Kehadiran</h1><p class="sub">Lihat catatan kehadiran dan laporan harian Anda.</p>
+  <div class="card"><div class="period"><span>‹</span><div style="text-align:center">Periode 3<small>10 Okt 2026 - 9 Nov 2026</small></div><span>›</span></div><div class="grid" id="grid"></div>
+    <div class="legend"><span>✔ Hadir disetujui</span><span>— Izin disetujui</span><span>● Tidak Hadir</span><span>✖ Kehadiran Ditolak</span><span>▲ Perlu Tindakan Anda</span><span>◆ Menunggu Tindakan Mentor</span><span>○ Belum Diisi</span><span>■ Hari Libur</span></div>
+  </div>
+  <div class="card" id="dialog"><b>Tambah laporan · 27 Oktober 2026</b>
+    <div class="MuiFormControl-root"><label>Uraian aktivitas</label><textarea></textarea></div>
+    <div class="MuiFormControl-root"><label>Pembelajaran yang diperoleh</label><textarea></textarea></div>
+    <div class="MuiFormControl-root"><label>Kendala yang dialami</label><textarea></textarea></div>
+    <label><input type="checkbox"> Saya menyatakan telah meninjau dan memastikan isian laporan ini sudah benar</label>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px"><button class="btn g">Batal</button><button class="btn">Simpan dan Kirim</button></div>
+  </div>
+</div>
+<div class="time">🕓 Waktu Server 16.07.13 WIB (GMT+7)</div>
+<nav><span>Beranda</span><span style="color:#2563eb">Riwayat</span><span>Perkembangan</span><span>Akun</span></nav>
+<script>
+const g=document.getElementById('grid');['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(d=>{const e=document.createElement('div');e.className='dow';e.textContent=d;g.appendChild(e);});
+for(let i=0;i<5;i++){const e=document.createElement('div');e.className='cell off';e.style.border='0';e.style.background='transparent';g.appendChild(e);}
+const days=[];for(let d=10;d<=31;d++)days.push([d,9]);for(let d=1;d<=9;d++)days.push([d,10]);
+days.forEach(([d,m])=>{const c=document.createElement('div');c.className='cell';const dow=new Date(2026,m,d).getDay();let icon;
+ if(dow===0||dow===6){c.classList.add('off');icon='<svg width="10" height="10"><rect width="10" height="10" fill="#111"/></svg>';}
+ else if(m===9&&d<27&&d!==19)icon='<svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" stroke="#16a34a" stroke-width="2" fill="none"/></svg>';
+ else if(m===9&&d===19)icon='<svg width="12" height="12"><rect x="1" y="5" width="10" height="2" fill="#16a34a"/></svg>';
+ else icon='<svg width="10" height="10"><circle cx="5" cy="5" r="3.5" stroke="#9ca3af" stroke-width="1.5" fill="none"/></svg>';
+ c.innerHTML='<div class="n'+(m===9&&d===27?' today':'')+'">'+d+'</div>'+icon;g.appendChild(c);});
+</script>
+</body></html>
