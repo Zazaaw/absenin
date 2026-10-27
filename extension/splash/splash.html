@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Magang Diary</title>
+  <link rel="stylesheet" href="splash.css">
+</head>
+<body>
+  <div class="sky"></div>
+  <div class="petals" id="petals"></div>
+  <main class="stage">
+    <div class="sun"></div>
+    <div class="ground"></div>
+    <div class="tree" id="tree"></div>
+    <div class="text">
+      <div class="kicker" id="kicker">Jam 16.00</div>
+      <h1 id="title">Waktunya cerita hari ini</h1>
+      <p id="sub">Hari ini ngapain aja? Ceritain dikit, sisanya dirangkai otomatis.</p>
+      <div class="streak" id="streak"></div>
+    </div>
+    <div class="actions">
+      <button class="btn p" id="go">Lanjut sekarang</button>
+      <button class="btn g" id="snooze">Tunda dulu</button>
+    </div>
+    <div class="ring"><svg viewBox="0 0 36 36"><circle class="bg" cx="18" cy="18" r="16"/><circle class="fg" id="ringFg" cx="18" cy="18" r="16"/></svg><span id="count">4</span></div>
+  </main>
+  <script src="../shared/util.js"></script>
+  <script src="../shared/sawit.js"></script>
+  <script src="../shared/themes.js"></script>
+  <script src="../shared/chime.js"></script>
+  <script src="../shared/idle.js"></script>
+  <script src="splash.js"></script>
+</body>
+</html>
