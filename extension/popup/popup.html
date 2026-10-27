@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Magang Diary</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="avatar" id="avatar"></div>
+      <div class="hero-text">
+        <div class="greet" id="greet">Hai!</div>
+        <div class="date" id="date"></div>
+        <div class="say" id="say"></div>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="num" id="streak">0</div>
+        <div class="lbl">hari streak</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="monthDone">0</div>
+        <div class="lbl" id="monthLbl">bunga bulan ini</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="jam">16.00</div>
+        <div class="lbl">jam pengingat</div>
+      </div>
+    </section>
+
+    <section class="garden">
+      <div class="garden-head">
+        <span id="monthName">Kebun</span>
+        <span class="legend"><i class="dot done"></i>terkirim <i class="dot wait"></i>belum <i class="dot off"></i>libur</span>
+      </div>
+      <div class="dow"><span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span><span>M</span></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="actions" id="actions"></section>
+
+    <footer class="foot">
+      <button class="link" id="openOptions">Pengaturan</button>
+      <span class="sep">·</span>
+      <button class="link" id="testNag">Tes pengingat</button>
+      <span class="sep">·</span>
+      <span class="muted" id="keyState"></span>
+    </footer>
+  </main>
+  <script src="../shared/util.js"></script>
+  <script src="../shared/templates.js"></script>
+  <script src="../shared/sawit.js"></script>
+  <script src="../shared/themes.js"></script>
+  <script src="../shared/idle.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
