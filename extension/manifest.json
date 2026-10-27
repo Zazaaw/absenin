@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "Magang Diary - Pengingat MagangHub",
+  "version": "0.2.0",
+  "description": "Pengingat absensi MagangHub yang nggak bisa dicuekin, plus laporan harian dari cerita singkat. 11 tema, mode malam, maskot hidup.",
+  "permissions": [
+    "alarms",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "optional_permissions": [
+    "history"
+  ],
+  "host_permissions": [
+    "https://monev.maganghub.kemnaker.go.id/*",
+    "https://api.openai.com/*",
+    "http://localhost:3000/*",
+    "https://*.vercel.app/*",
+    "https://magangdiary.id/*",
+    "https://*.magangdiary.id/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Magang Diary",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "commands": {
+    "open-maganghub": {
+      "suggested_key": {
+        "default": "Alt+M"
+      },
+      "description": "Buka MagangHub dan panel cerita"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://monev.maganghub.kemnaker.go.id/*"
+      ],
+      "js": [
+        "shared/util.js",
+        "shared/templates.js",
+        "shared/sawit.js",
+        "shared/themes.js",
+        "shared/idle.js",
+        "content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
