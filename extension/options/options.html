@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Pengaturan Magang Diary</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand"><div id="avatar"></div><div><b>Magang Diary</b><small id="verText">v0.2.0</small></div></div>
+      <nav class="tabs">
+        <button class="tab on" data-tab="akun">Akun</button>
+        <button class="tab" data-tab="pengingat">Pengingat</button>
+        <button class="tab" data-tab="tampilan">Tampilan</button>
+        <button class="tab" data-tab="laporan">Laporan</button>
+        <button class="tab" data-tab="lanjutan">Lanjutan</button>
+      </nav>
+      <div class="side-foot">
+        <button class="btn g small" id="runGuide" type="button">Jalankan panduan lagi</button>
+        <p class="hint">Perubahan tersimpan saat kamu klik Simpan di bawah.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- AKUN -->
+      <section class="panel on" data-panel="akun">
+        <h1>Akun</h1>
+        <p class="lead">Satu kode lisensi, satu laptop. Kunci AI ada di server, bukan di sini.</p>
+        <div class="card">
+          <div id="boxLisensi">
+            <label>Kode lisensi
+              <div class="keyrow">
+                <input type="text" id="license" placeholder="MD-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" class="mono">
+                <button class="btn l" id="activate" type="button">Aktifkan</button>
+              </div>
+            </label>
+            <div class="hint" id="licenseHint">Belum ada lisensi. Dapatkan di dashboard Magang Diary, lalu tempel di sini.</div>
+            <div class="row-links"><a href="#" id="openDash">Buka dashboard</a></div>
+          </div>
+          <label>Nama panggilan <span class="why">dipakai maskot buat nyapa</span>
+            <input type="text" id="nickname" placeholder="misalnya: Wak">
+          </label>
+        </div>
+        <details class="card soft">
+          <summary>Mau pakai API key OpenAI sendiri? (lanjutan)</summary>
+          <label class="check"><input type="radio" name="mode" id="modeLisensi" value="lisensi" checked> Pakai lisensi Magang Diary (disarankan)</label>
+          <label class="check"><input type="radio" name="mode" id="modeKey" value="key"> Pakai API key OpenAI sendiri</label>
+          <div id="boxKey">
+            <label>API key OpenAI
+              <div class="keyrow">
+                <input type="password" id="key" placeholder="sk-..." autocomplete="off" spellcheck="false">
+                <button class="btn g" id="toggleKey" type="button">Lihat</button>
+                <button class="btn l" id="testKey" type="button">Tes</button>
+              </div>
+            </label>
+            <div class="hint" id="keyHint"></div>
+            <label>Model
+              <input type="text" id="model" list="models" placeholder="gpt-4o-mini">
+              <datalist id="models"><option value="gpt-4o-mini"></option><option value="gpt-4o"></option><option value="gpt-4.1-mini"></option><option value="gpt-4.1"></option></datalist>
+            </label>
+            <p class="hint">Key disimpan di laptop ini saja dan hanya dikirim ke api.openai.com.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- PENGINGAT -->
+      <section class="panel" data-panel="pengingat">
+        <h1>Pengingat</h1>
+        <p class="lead">Senin sampai Jumat. Berhenti sendiri begitu laporan hari itu terkirim.</p>
+        <div class="card">
+          <div class="grid2">
+            <label>Jam pengingat
+              <div class="keyrow timerow"><select id="hour"></select><span class="colon">:</span><select id="minute"></select></div>
+            </label>
+            <label>Ulangi tiap <span class="why">kalau belum diisi</span>
+              <div class="keyrow"><input type="number" id="interval" min="1" max="120" value="10"><span class="unit">menit</span></div>
+            </label>
+            <label>Tunda selama <span class="why">tombol "Tunda" di notifikasi</span>
+              <div class="keyrow"><input type="number" id="snooze" min="1" max="240" value="15"><span class="unit">menit</span></div>
+            </label>
+          </div>
+          <div class="toggles">
+            <label class="check"><input type="checkbox" id="fullscreen" checked> <span>Buka MagangHub <b>fullscreen</b> saat pengingat</span></label>
+            <label class="check"><input type="checkbox" id="splash" checked> <span>Layar pembuka dulu <span class="why">4 detik, biar nggak kaget</span></span></label>
+            <label class="check"><input type="checkbox" id="sound" checked> <span>Bunyi chime 5 detik</span></label>
+            <label class="check"><input type="checkbox" id="badge" checked> <span>Angka streak di ikon toolbar</span></label>
+          </div>
+          <label>Suara chime
+            <div class="keyrow"><select id="chime"></select><button class="btn g" id="playChime" type="button">Dengar</button></div>
+          </label>
+          <div class="hint" id="chimeDesc"></div>
+        </div>
+        <div class="card">
+          <div class="keyrow"><button class="btn l" id="testNow" type="button">Tes pengingat sekarang</button><span class="hint" id="testMsg"></span></div>
+          <div class="hint" id="alarmInfo"></div>
+          <div class="hint" id="notifInfo"></div>
+        </div>
+        <details class="card soft">
+          <summary>Hari libur tambahan</summary>
+          <p class="hint">Hari libur di kalender MagangHub dideteksi otomatis. Ini untuk cuti atau tanggal merah tambahan.</p>
+          <div class="keyrow"><input type="date" id="holiday"><button class="btn l" id="addHoliday" type="button">Tambah</button></div>
+          <div id="holidayList" class="chips"></div>
+        </details>
+        <details class="card soft">
+          <summary>Kalau Chrome sering ketutup sore-sore</summary>
+          <p class="hint">Ekstensi cuma jalan selama Chrome hidup. Buka folder <code>scheduler</code> di dalam folder ekstensi, klik kanan <code>pasang-task.ps1</code>, pilih "Run with PowerShell". Sekali saja. Setelah itu Chrome dibuka otomatis pada jam pengingat.</p>
+        </details>
+      </section>
+
+      <!-- TAMPILAN -->
+      <section class="panel" data-panel="tampilan">
+        <h1>Tampilan</h1>
+        <p class="lead">Pilih maskot. Warna, suara, dan ikon kalender ikut.</p>
+        <div class="card">
+          <div class="themes" id="themes"></div>
+          <div class="hint" id="themeDesc"></div>
+          <label>Mode malam
+            <select id="nightMode">
+              <option value="auto">Otomatis (gelap jam 18.00 sampai 06.00)</option>
+              <option value="off">Selalu terang</option>
+              <option value="on">Selalu gelap</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <!-- LAPORAN -->
+      <section class="panel" data-panel="laporan">
+        <h1>Laporan</h1>
+        <p class="lead">Cara AI merangkai tiga kolom dari ceritamu.</p>
+        <div class="card">
+          <label>Gaya bawaan <span class="why">bisa diganti tiap generate di panel</span>
+            <select id="template"></select>
+          </label>
+          <div class="hint" id="tplDesc"></div>
+          <label class="check"><input type="checkbox" id="historyHints"> <span>Tebak cerita dari riwayat Chrome hari ini</span></label>
+          <p class="hint" id="histHint">Chrome akan minta izin membaca riwayat. Dibaca di laptop ini saja, dirangkum jadi satu kalimat yang kamu lihat dulu sebelum apa pun dikirim.</p>
+        </div>
+        <details class="card soft">
+          <summary>Gaya laporan tambahan</summary>
+          <div id="customList" class="list"></div>
+          <div class="grid2">
+            <label>Nama gaya <input type="text" id="ctName" placeholder="misalnya: Lapangan / Kebun"></label>
+            <label>Emoji <input type="text" id="ctEmoji" placeholder="🌱" maxlength="4"></label>
+          </div>
+          <label>Instruksi untuk AI
+            <textarea id="ctInstr" rows="2" placeholder="Contoh: Fokus pada kegiatan di lapangan: lokasi secara umum, pengamatan, dan koordinasi dengan petugas kebun."></textarea>
+          </label>
+          <button class="btn l" id="addCustom" type="button">Tambah gaya</button>
+        </details>
+      </section>
+
+      <!-- LANJUTAN -->
+      <section class="panel" data-panel="lanjutan">
+        <h1>Lanjutan</h1>
+        <p class="lead">Biasanya nggak perlu disentuh.</p>
+        <div class="card">
+          <label>Alamat server <span class="why">ganti hanya kalau diminta</span>
+            <input type="text" id="apiBase" placeholder="http://localhost:3000">
+          </label>
+          <label class="check"><input type="checkbox" id="telemetry" checked> <span>Kirim laporan error anonim <span class="why">supaya kami tahu kalau MagangHub berubah tampilan; tidak pernah berisi isi laporan</span></span></label>
+        </div>
+        <div class="card">
+          <h2>Log kejadian</h2>
+          <div id="logList" class="log"></div>
+          <div><button class="btn g" id="clearLog" type="button">Bersihkan log</button></div>
+        </div>
+      </section>
+
+      <div class="savebar">
+        <span id="saveMsg" class="hint"></span>
+        <button class="btn p" id="save" type="button">Simpan</button>
+      </div>
+    </main>
+  </div>
+  <script src="../shared/util.js"></script>
+  <script src="../shared/templates.js"></script>
+  <script src="../shared/sawit.js"></script>
+  <script src="../shared/themes.js"></script>
+  <script src="../shared/chime.js"></script>
+  <script src="../shared/idle.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
