@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Selamat datang · Magang Diary</title>
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <main class="wrap">
+    <div class="progress"><span data-step="1" class="on"></span><span data-step="2"></span><span data-step="3"></span><span data-step="4"></span></div>
+
+    <section class="step on" data-step="1">
+      <div class="avatar" id="av1"></div>
+      <h1>Halo! Dua menit, terus kamu nggak bakal lupa laporan lagi.</h1>
+      <p class="sub">Pertama, tempel kode lisensi dari dashboard Magang Diary. Belum punya? Daftar dulu, trial 7 hari gratis.</p>
+      <div class="row">
+        <input id="license" placeholder="MD-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+        <button class="btn p" id="activate">Aktifkan</button>
+      </div>
+      <p class="hint" id="licHint">Kode lisensi ada di dashboard, bagian "Kode lisensi".</p>
+      <div class="links">
+        <a href="#" id="openDash">Buka dashboard untuk ambil kode</a>
+        <a href="#" id="skipKey">Mau pakai API key OpenAI sendiri? Lewati</a>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <h1>Pilih teman yang bakal ngingetin kamu.</h1>
+      <p class="sub">Bisa diganti kapan saja di pengaturan. Mereka nggak tersinggung.</p>
+      <div class="themes" id="themes"></div>
+      <p class="hint" id="themeDesc"></p>
+      <div class="actions"><button class="btn g" data-prev>Kembali</button><button class="btn p" data-next>Lanjut</button></div>
+    </section>
+
+    <section class="step" data-step="3">
+      <h1>Jam berapa biasanya kamu lupa?</h1>
+      <p class="sub">Di jam ini, Senin sampai Jumat, Chrome dibawa ke depan dan MagangHub kebuka. Kalau belum diisi, diulang tiap 10 menit.</p>
+      <div class="grid2">
+        <label>Jam pengingat<div class="row"><select id="hour"></select><span class="colon">:</span><select id="minute"></select></div></label>
+        <label>Nama panggilan (opsional)<input id="nickname" placeholder="misalnya: Wak"></label>
+      </div>
+      <label class="check"><input type="checkbox" id="sound" checked> Bunyi chime singkat saat pengingat</label>
+      <label class="check"><input type="checkbox" id="telemetry" checked> Kirim laporan error anonim supaya kami tahu kalau MagangHub berubah tampilan</label>
+      <div class="actions"><button class="btn g" data-prev>Kembali</button><button class="btn l" id="test">Tes pengingat sekarang</button><button class="btn p" data-next>Lanjut</button></div>
+      <p class="hint" id="testHint"></p>
+    </section>
+
+    <section class="step" data-step="4">
+      <div class="avatar" id="av4"></div>
+      <h1>Siap. Besok jam <span id="jamText">16.00</span>, ada yang ngingetin.</h1>
+      <p class="sub">Tiga hal yang berguna:</p>
+      <ul class="tips">
+        <li><b>Alt+M</b> dari tab mana pun membuka MagangHub plus panel cerita.</li>
+        <li>Di halaman MagangHub, klik tanggal hari ini, panel ikut kebuka. Ketik satu baris, Generate, Isi ke form, lalu kamu sendiri yang klik Simpan dan Kirim.</li>
+        <li>Kalau Chrome sering ketutup sore-sore, pasang Task Scheduler dari folder <code>scheduler</code> (sekali saja).</li>
+      </ul>
+      <div class="actions"><button class="btn g" id="openSettings">Buka pengaturan</button><button class="btn p" id="finish">Buka MagangHub</button></div>
+    </section>
+  </main>
+  <script src="../shared/util.js"></script>
+  <script src="../shared/templates.js"></script>
+  <script src="../shared/sawit.js"></script>
+  <script src="../shared/themes.js"></script>
+  <script src="../shared/idle.js"></script>
+  <script src="onboarding.js"></script>
+</body>
+</html>
