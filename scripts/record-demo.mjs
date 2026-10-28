@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 import os from "os";
+import { adminClient, assertSchema } from "./supa.mjs";
 
 const BASE = process.env.BASE || "http://localhost:3000";
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -14,15 +15,14 @@ const OUT = path.resolve(here, "..", "public");
 const MOCK = fs.readFileSync(path.join(here, "mock-maganghub.html"), "utf8");
 const SITE = "https://monev.maganghub.kemnaker.go.id/dashboard/riwayat";
 
-// lisensi sementara untuk demo, dibuat lewat jalur admin (tidak kena pembatas laju trial)
+// lisensi sementara untuk demo, ditulis langsung ke Supabase lewat service role (tidak kena pembatas laju)
 async function makeLicense() {
-  const login = await fetch(BASE + "/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: process.env.ADMIN_EMAIL || "admin@absenin.local", password: process.env.ADMIN_PASSWORD || "admin123" }) });
-  if (!login.ok) throw new Error("login admin gagal: " + (await login.text()));
-  const cookie = (login.headers.get("set-cookie") || "").split(";")[0];
-  const r = await fetch(BASE + "/api/admin/licenses", { method: "POST", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ email: `demo-video-${Date.now()}@absenin.local`, plan: "pro", days: 1, dailyQuota: 20, note: "lisensi sementara rekaman demo" }) });
-  const j = await r.json();
-  if (!j.license?.key) throw new Error("buat lisensi gagal: " + JSON.stringify(j));
-  return j.license.key;
+  const { sb, env: senv } = adminClient();
+  await assertSchema(sb, senv);
+  const key = "AB-DEMO-" + Math.random().toString(36).slice(2, 6).toUpperCase() + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+  const { error } = await sb.from("licenses").insert({ key, email: `demo-video-${Date.now()}@absenin.local`, plan: "pro", status: "active", daily_quota: 20, expires_at: new Date(Date.now() + 86400000).toISOString(), note: "lisensi sementara rekaman demo" });
+  if (error) throw new Error("buat lisensi gagal: " + error.message);
+  return key;
 }
 
 const key = await makeLicense();
