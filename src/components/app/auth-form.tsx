@@ -18,6 +18,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [setuju, setSetuju] = useState(false);
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
+  const [confirmSent, setConfirmSent] = useState(false);
   const plan = params.get("plan");
 
   async function submit(e: React.FormEvent) {
@@ -27,6 +28,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
     const j = await r.json().catch(() => ({}));
     setBusy(false);
     if (!r.ok) { setErr(j.error || "Gagal."); return; }
+    if (j.needsConfirm) { setConfirmSent(true); return; }
     router.push(plan ? `/checkout?plan=${plan}` : j.role === "admin" ? "/admin" : "/dashboard");
     router.refresh();
   }
@@ -42,6 +44,12 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
             <p className="mt-1 text-body-sm text-muted-foreground">{mode === "login" ? "Kelola lisensi dan lihat pemakaian." : plan ? `Lanjut ke paket ${plan} setelah daftar.` : "Trial 7 hari langsung aktif setelah daftar."}</p>
           </div>
         </div>
+        {confirmSent ? (
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-6 text-center">
+            <p className="font-semibold text-emerald-600 dark:text-emerald-400">Cek email kamu.</p>
+            <p className="mt-1 text-body-sm text-muted-foreground">Kami kirim tautan konfirmasi ke {email}. Klik tautannya, lalu <Link href="/login" className="font-semibold text-foreground underline-offset-4 hover:underline">masuk</Link>.</p>
+          </div>
+        ) : (
         <form onSubmit={submit} className="space-y-3 rounded-xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-800 dark:bg-neutral-900/50">
           {mode === "register" && <Input placeholder="Nama panggilan" value={name} onChange={(e) => setName(e.target.value)} />}
           <Input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -58,7 +66,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
             {mode === "login" ? <>Belum punya akun? <Link href="/daftar" className="font-semibold text-foreground underline-offset-4 hover:underline">Daftar</Link></> : <>Sudah punya akun? <Link href="/login" className="font-semibold text-foreground underline-offset-4 hover:underline">Masuk</Link></>}
           </p>
         </form>
-        <p className="mt-4 text-center text-overline uppercase text-muted-foreground">Mode lokal: admin@absenin.local / admin123 · demo@absenin.local / demo123</p>
+        )}
       </BlurFade>
     </div>
   );

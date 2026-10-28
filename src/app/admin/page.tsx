@@ -6,7 +6,6 @@ import { AppShell } from "@/components/app/shell";
 import { CreateLicense, LicenseTable, UserTable, ConfigForm } from "@/components/app/admin-panels";
 import { getSessionUser } from "@/lib/auth";
 import { getDb } from "@/lib/db";
-import { isSupabaseMode } from "@/lib/env";
 
 export const metadata = { title: "Admin" };
 export const dynamic = "force-dynamic";
@@ -33,7 +32,7 @@ export default async function AdminPage() {
   return (
     <AppShell admin email={user.email}>
       <BlurFade>
-        <PageHeader title="Admin" subtitle={`Mode data: ${isSupabaseMode() ? "Supabase" : "lokal (web/.data/db.json)"}. Pantau pemakaian, kelola lisensi, ubah konfigurasi tanpa rilis ulang.`} />
+        <PageHeader title="Admin" subtitle="Pantau pemakaian, kelola lisensi, ubah konfigurasi tanpa rilis ulang. Semua data di Supabase." />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {tiles.map((t, i) => (
