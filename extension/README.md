@@ -1,4 +1,6 @@
-# Absenin - Pengingat MagangHub
+# Absenin · Ekstensi Chrome
+
+![Popup](../public/shots/popup-sore.png)
 
 Ekstensi Chrome yang mengingatkan absensi harian di MagangHub (monev.maganghub.kemnaker.go.id), lalu membantu menulis uraian aktivitas, pembelajaran, dan kendala dari cerita singkat.
 
@@ -24,20 +26,19 @@ Opsional, mati secara bawaan. Kalau dinyalakan di Pengaturan > Gaya laporan, Chr
 
 ## Yang dilakukan
 
-- Jam pengingat (default 16.00, Senin sampai Jumat) menembak notifikasi Windows dan membuka Chrome dalam mode fullscreen. Yang muncul duluan adalah layar pembuka Sawit (animasi 4 detik plus chime singkat), baru pindah ke halaman Riwayat. Layar pembuka dan suara bisa dimatikan di pengaturan.
+- Jam pengingat (default 16.00, Senin sampai Jumat) menembak notifikasi Windows dan membuka Chrome dalam mode fullscreen. Yang muncul duluan adalah layar pembuka (animasi 4 detik plus chime 5 detik), baru pindah ke halaman Riwayat. Layar pembuka dan suara bisa dimatikan di pengaturan.
 - Pengingat terjadwal sengaja diam kalau laporan hari itu sudah terkirim atau hari itu libur. Tombol "Tes pengingat sekarang" di pengaturan selalu menembak apa pun statusnya, dan bagian "Tes dan log" menampilkan kejadian terakhir (alarm bunyi, dilewati, notifikasi gagal) untuk memeriksa kenapa pengingat diam.
 - Kalau belum diisi, pengingat diulang tiap 10 menit (bisa diubah). Berhenti otomatis saat laporan terkirim, atau saat kamu tandai sendiri.
 - Panel di pojok kanan bawah halaman MagangHub: ceritain dikit (atau tebak dari riwayat), pilih gaya laporan, klik Generate. Hasilnya tiga kolom yang bisa diedit dan disalin, lalu "Isi ke form". Kamu yang centang pernyataan dan klik "Simpan dan Kirim". Ekstensi tidak pernah menekan tombol kirim.
-- Popup ekstensi: kebun bulan ini (satu bunga per hari terkirim), streak, dan tombol cepat.
+- Popup ekstensi: kebun bulan ini (satu ikon tema per hari terkirim), streak, dan tombol cepat.
 - Script Task Scheduler supaya Chrome tetap terbuka pada jam pengingat walau sedang ditutup.
 
 ## Pasang
 
 1. Buka `chrome://extensions`, nyalakan **Developer mode** di kanan atas.
 2. Klik **Load unpacked**, pilih folder `extension` ini.
-3. Klik ikon Sawit di toolbar (pin dulu lewat ikon puzzle), buka **Pengaturan**.
-4. Isi API key OpenAI, klik **Tes**, lalu **Simpan**. Atur jam dan nama panggilan sekalian.
-5. Buka halaman MagangHub Riwayat satu kali supaya status hari ini terbaca.
+3. Tab panduan terbuka otomatis: tempel kode lisensi dari dashboard Absenin, pilih maskot, set jam, tes pengingat.
+4. Buka halaman MagangHub Riwayat satu kali supaya status hari ini terbaca.
 
 ## Task Scheduler (opsional tapi disarankan)
 
@@ -57,12 +58,12 @@ Saat pertama dipasang, tab panduan 4 langkah terbuka: tempel kode lisensi, pilih
 
 Sejak v0.2 ekstensi punya dua mode di Pengaturan > Akun dan lisensi:
 
-- **Lisensi Absenin** (bawaan): ekstensi cuma memegang kode lisensi. Generate dikirim ke server (`web/`, lihat `web/README.md`) yang memegang kunci AI, memeriksa kuota harian, dan mencatat pemakaian. Alamat server bawaan `http://localhost:3000`, bisa diubah.
+- **Lisensi Absenin** (bawaan): ekstensi cuma memegang kode lisensi. Generate dikirim ke server (web di root repo, lihat README utama) yang memegang kunci AI, memeriksa kuota harian, dan mencatat pemakaian. Alamat server bawaan `http://localhost:3000`, bisa diubah.
 - **API key OpenAI sendiri** (lanjutan): perilaku lama, kunci disimpan lokal.
 
 Web-nya (landing page, dashboard, admin, API) ada di root repo; folder ini hanya ekstensinya.
 
-## Keamanan API key
+## Keamanan API key (mode key sendiri)
 
 - Key disimpan di `chrome.storage.local` ekstensi ini, tidak di-sync ke akun Google.
 - Hanya service worker ekstensi yang memegang key dan hanya mengirimnya ke `api.openai.com`. Halaman MagangHub dan popup tidak pernah menerimanya.
@@ -83,9 +84,10 @@ Content script membaca ikon di sel tanggal hari ini pada kalender: hijau berarti
 manifest.json          izin dan daftar file
 background.js          alarm, notifikasi, buka tab, panggilan OpenAI
 content/content.js     deteksi status, panel generate, isi form
-popup/                 buku harian: sawit, kebun, streak
-options/               pengaturan: jam, key, gaya laporan, libur
-shared/                util tanggal, daftar gaya, tema dan karakter (themes.js, sawit.js)
+popup/                 buku harian: maskot, kebun, streak
+options/               pengaturan 5 tab: akun, pengingat, tampilan, laporan, lanjutan
+onboarding/            panduan pertama kali
+shared/                util, gaya laporan, 12 tema + maskot (themes.js), chime, idle
 splash/                layar pembuka sebelum halaman MagangHub
 scheduler/             script Task Scheduler Windows
 icons/                 ikon ekstensi
