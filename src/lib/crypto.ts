@@ -15,7 +15,7 @@ export function verifyPassword(pw: string, stored: string) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-// Kode lisensi: MD-XXXX-XXXX-XXXX (tanpa huruf yang mirip angka).
+// Kode lisensi: AB-XXXX-XXXX-XXXX (tanpa huruf yang mirip angka).
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 export function makeLicenseKey() {
   const bytes = randomBytes(12);
@@ -24,7 +24,7 @@ export function makeLicenseKey() {
     if (i > 0 && i % 4 === 0) out += "-";
     out += ALPHABET[bytes[i] % ALPHABET.length];
   }
-  return `MD-${out}`;
+  return `AB-${out}`;
 }
 
 // Token sesi sederhana: payload base64url + HMAC.

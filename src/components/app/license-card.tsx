@@ -24,7 +24,7 @@ export function LicenseCard({ license, usedToday }: { license: License; usedToda
         <div>
           <p className="text-overline font-bold uppercase text-muted-foreground">Kode lisensi · paket {license.plan}</p>
           <div className="mt-2 flex items-center gap-2">
-            <code className="tnum rounded-md bg-muted px-3 py-1.5 font-mono text-body font-semibold tracking-wider">{show ? license.key : license.key.replace(/^(MD-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, "$1-••••-$2")}</code>
+            <code className="tnum rounded-md bg-muted px-3 py-1.5 font-mono text-body font-semibold tracking-wider">{show ? license.key : license.key.replace(/^(AB-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, "$1-••••-$2")}</code>
             <Button variant="ghost" size="icon" aria-label="Lihat" onClick={() => setShow(!show)}>{show ? <EyeOff /> : <Eye />}</Button>
             <Button variant="ghost" size="icon" aria-label="Salin" onClick={copy}>{copied ? <Check className="text-emerald-500" /> : <Copy />}</Button>
           </div>

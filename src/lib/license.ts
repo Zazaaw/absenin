@@ -23,5 +23,5 @@ export async function checkLicense(rawKey: string | null | undefined, opts?: { c
 }
 
 export function maskKey(key: string) {
-  return key.replace(/^(MD-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, "$1-••••-$2");
+  return key.replace(/^(AB-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, "$1-••••-$2");
 }

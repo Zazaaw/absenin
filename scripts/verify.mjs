@@ -37,7 +37,7 @@ async function main() {
   if (gen.status !== 200) throw new Error("generate gagal " + JSON.stringify(gen.j));
   log("generate ok", gen.j.offline ? "(template offline)" : "(OpenAI)", "sisa", gen.j.remaining, "aktivitas", gen.j.fields.aktivitas.length, "char");
   // 5. lisensi salah
-  const bad = await api("/api/generate", { method: "POST", headers: { Authorization: "Bearer MD-XXXX-XXXX-XXXX" }, body: JSON.stringify({ brief: "apa saja" }) });
+  const bad = await api("/api/generate", { method: "POST", headers: { Authorization: "Bearer AB-XXXX-XXXX-XXXX" }, body: JSON.stringify({ brief: "apa saja" }) });
   if (bad.status !== 401) throw new Error("lisensi salah harusnya 401, dapat " + bad.status);
   log("lisensi salah ditolak 401 ok");
 
@@ -60,7 +60,7 @@ async function main() {
 
   await page.goto(BASE + "/login"); await page.waitForTimeout(800);
   await page.screenshot({ path: path.join(OUT, "login.png") });
-  await page.fill('input[type=email]', "admin@magangdiary.local"); await page.fill('input[type=password]', "admin123");
+  await page.fill('input[type=email]', "admin@absenin.local"); await page.fill('input[type=password]', "admin123");
   await page.click('button[type=submit]'); await page.waitForURL("**/admin", { timeout: 15000 }); await page.waitForTimeout(1200);
   await page.screenshot({ path: path.join(OUT, "admin.png"), fullPage: true });
   log("admin ok");
