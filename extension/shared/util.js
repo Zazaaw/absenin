@@ -8,7 +8,7 @@
     fullscreen: true,
     splash: true,
     sound: true,
-    theme: 'simpel',
+    theme: 'sore',
     nightMode: 'auto',
     chime: 'auto',
     badge: true,
