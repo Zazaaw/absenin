@@ -1,4 +1,4 @@
-// Mode Supabase. Jalankan supabase/schema.sql di project kamu, lalu isi env SUPABASE_*.
+// Data layer Supabase. Jalankan supabase/schema.sql di project kamu, lalu isi env SUPABASE_*.
 // Semua akses dari server memakai service role (tidak pernah dikirim ke browser).
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { BetaSignup, DB, License, RemoteConfig, Stats, TelemetryEntry, UsageEntry, User } from "./types";
@@ -12,7 +12,7 @@ function sb() {
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const userRow = (r: any): User => ({ id: r.id, email: r.email, name: r.name || "", role: r.role || "user", createdAt: r.created_at });
+const userRow = (r: any): User => ({ id: r.id, email: r.email, name: r.name || "", role: r.role || "user", createdAt: r.created_at, authId: r.auth_id || null });
 const licRow = (r: any): License => ({
   id: r.id, key: r.key, userId: r.user_id, email: r.email, plan: r.plan, status: r.status, dailyQuota: r.daily_quota,
   expiresAt: r.expires_at, createdAt: r.created_at, lastUsedAt: r.last_used_at, deviceId: r.device_id, deviceName: r.device_name, note: r.note || "",
@@ -46,9 +46,16 @@ export const supabaseDb: DB = {
     const { data } = await sb().from("profiles").select("*").eq("id", id).maybeSingle();
     return data ? userRow(data) : null;
   },
+  async getUserByAuthId(authId) {
+    const { data } = await sb().from("profiles").select("*").eq("auth_id", authId).maybeSingle();
+    return data ? userRow(data) : null;
+  },
+  async linkAuthId(id, authId) {
+    await sb().from("profiles").update({ auth_id: authId }).eq("id", id);
+  },
   async createUser(u) {
-    // Di mode Supabase, user dibuat lewat Supabase Auth; profiles diisi trigger. Ini fallback manual.
-    const { data, error } = await sb().from("profiles").insert({ email: u.email.toLowerCase(), name: u.name, role: u.role }).select().single();
+    // Biasanya profil dibuat trigger saat daftar lewat Supabase Auth; ini cadangan kalau belum ada.
+    const { data, error } = await sb().from("profiles").upsert({ email: u.email.toLowerCase(), name: u.name, role: u.role, auth_id: u.authId || null }, { onConflict: "email" }).select().single();
     if (error) throw error;
     return userRow(data);
   },

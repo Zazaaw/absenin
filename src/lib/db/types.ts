@@ -1,4 +1,4 @@
-// Kontrak data. Dua implementasi: lokal (JSON) dan Supabase. Keduanya memenuhi interface ini.
+// Kontrak data. Implementasi: Supabase (src/lib/db/supabase.ts).
 
 export type Role = "user" | "admin";
 export type Plan = "trial" | "pro" | "tim";
@@ -10,7 +10,7 @@ export interface User {
   name: string;
   role: Role;
   createdAt: string;
-  passwordHash?: string; // hanya mode lokal
+  authId?: string | null; // id di Supabase Auth
 }
 
 export interface License {
@@ -89,6 +89,8 @@ export interface DB {
   // users
   getUserByEmail(email: string): Promise<User | null>;
   getUserById(id: string): Promise<User | null>;
+  getUserByAuthId(authId: string): Promise<User | null>;
+  linkAuthId(id: string, authId: string): Promise<void>;
   createUser(u: Omit<User, "id" | "createdAt">): Promise<User>;
   listUsers(): Promise<User[]>;
   setUserRole(id: string, role: Role): Promise<void>;

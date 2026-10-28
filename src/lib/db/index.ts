@@ -1,10 +1,10 @@
-import { isSupabaseMode } from "../env";
-import { localDb } from "./local";
+import { assertSupabaseEnv } from "../env";
 import { supabaseDb } from "./supabase";
 import type { DB } from "./types";
 
 export * from "./types";
 
 export function getDb(): DB {
-  return isSupabaseMode() ? supabaseDb : localDb;
+  assertSupabaseEnv();
+  return supabaseDb;
 }
