@@ -1,4 +1,4 @@
-# Magang Diary
+# Absenin
 
 Pengingat absensi MagangHub yang nggak bisa dicuekin, plus laporan harian yang dirangkai dari cerita singkat. Bukan produk Kemnaker.
 
@@ -22,8 +22,8 @@ Mode lokal menyimpan data di `.data/db.json` (dibuat otomatis, berisi akun conto
 
 | Akun | Email | Sandi | Peran |
 |---|---|---|---|
-| Admin | admin@magangdiary.local | admin123 | admin |
-| Demo | demo@magangdiary.local | demo123 | user, punya lisensi pro |
+| Admin | admin@absenin.local | admin123 | admin |
+| Demo | demo@absenin.local | demo123 | user, punya lisensi pro |
 
 Tanpa `OPENAI_API_KEY`, endpoint generate memakai template cadangan dan menandainya `offline`, jadi seluruh alur bisa dites tanpa biaya.
 
@@ -77,7 +77,7 @@ Kunci OpenAI hanya ada di env server. Ekstensi memegang kode lisensi saja.
 | Perintah | Fungsi |
 |---|---|
 | `npm run shots` | Screenshot ekstensi asli dengan Playwright (popup, splash, pengaturan, panel di halaman MagangHub tiruan) |
-| `npm run pack` | Bungkus `extension/` ke `public/downloads/magang-diary.zip` dan sinkron `extension/shared` ke `public/ext` (otomatis saat build) |
+| `npm run pack` | Bungkus `extension/` ke `public/downloads/absenin.zip` dan sinkron `extension/shared` ke `public/ext` (otomatis saat build) |
 | `npm run demo` | Rekam video demo `public/demo.webm` dari ekstensi asli (layar pembuka, panel, generate, isi form); butuh dev server jalan |
 | `node scripts/verify.mjs` | Uji alur daftar, trial, aktivasi, generate, lisensi salah, lalu screenshot landing, admin, dashboard ke `.verify/` |
 
