@@ -230,6 +230,7 @@
 
   // ---------- ikon kehadiran di kalender (per tema) ----------
   const MARKS = {
+    sun: c => '<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="5" fill="' + c + '"/><g stroke="' + c + '" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M4.5 6.5l2 2M19.5 6.5l-2 2M2 13h3M19 13h3"/></g><path d="M3 20h18" stroke="' + c + '" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>',
     flower: c => '<svg viewBox="0 0 24 24"><g fill="' + c + '"><circle cx="12" cy="6.5" r="3.4"/><circle cx="17.5" cy="12" r="3.4"/><circle cx="12" cy="17.5" r="3.4"/><circle cx="6.5" cy="12" r="3.4"/></g><circle cx="12" cy="12" r="3" fill="#FFE7A8"/></svg>',
     check: c => '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="' + c + '"/><path d="M7.5 12.5l3 3 6-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     square: c => '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="' + c + '"/><path d="M7.5 12.5l3 3 6-7" stroke="#111318" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -240,6 +241,34 @@
     paw: c => '<svg viewBox="0 0 24 24"><g fill="' + c + '"><ellipse cx="7" cy="8" rx="2.2" ry="2.8"/><ellipse cx="17" cy="8" rx="2.2" ry="2.8"/><ellipse cx="3.8" cy="13" rx="2" ry="2.5"/><ellipse cx="20.2" cy="13" rx="2" ry="2.5"/><path d="M12 11c-3.5 0-6 3-6 5.5 0 2 1.5 3 3 3 1 0 2-.5 3-.5s2 .5 3 .5c1.5 0 3-1 3-3 0-2.5-2.5-5.5-6-5.5z"/></g></svg>',
     claw: c => '<svg viewBox="0 0 24 24"><g fill="' + c + '"><ellipse cx="7" cy="7" rx="2.2" ry="2.8"/><ellipse cx="17" cy="7" rx="2.2" ry="2.8"/><ellipse cx="3.6" cy="12" rx="2" ry="2.5"/><ellipse cx="20.4" cy="12" rx="2" ry="2.5"/><path d="M12 10c-3.5 0-6 3-6 5.5 0 2 1.5 3 3 3 1 0 2-.5 3-.5s2 .5 3 .5c1.5 0 3-1 3-3 0-2.5-2.5-5.5-6-5.5z"/></g><path d="M6.2 3.2l.8 1.6M17.8 3.2l-.8 1.6M2.4 8.6l1.2 1.1M21.6 8.6l-1.2 1.1" stroke="' + c + '" stroke-width="1.4" stroke-linecap="round"/></svg>'
   };
+
+
+  // Sore: matahari senja di atas garis cakrawala. Mood mengubah tinggi matahari dan wajahnya.
+  function soreSVG(mood, size) {
+    const low = mood === 'wilted', worried = mood === 'worried', sleep = mood === 'sleep';
+    const cy = sleep ? 84 : low ? 76 : 62;                  // makin rendah makin "tenggelam"
+    const sun = low ? '#E7A36A' : '#FFB55A', sun2 = low ? '#D98457' : '#FF8E5E', glow = low ? '#C98BD6' : '#FFD3A0';
+    const horizon = '#2A2338', sea = '#3B2F55';
+    const rays = sleep ? '' : [-60, -30, 0, 30, 60].map(a => `<line x1="60" y1="${cy - 34}" x2="60" y2="${cy - 44}" stroke="${glow}" stroke-width="3" stroke-linecap="round" transform="rotate(${a} 60 ${cy})" opacity="${low ? .5 : .9}"/>`).join('');
+    let face;
+    if (sleep) face = `<path d="M50 ${cy - 6} q4 3 8 0 M62 ${cy - 6} q4 3 8 0" stroke="${INK}" stroke-width="2.2" fill="none" stroke-linecap="round"/><text x="82" y="${cy - 30}" font-size="11" font-weight="700" fill="#FFD3A0" font-family="sans-serif">z</text><text x="90" y="${cy - 38}" font-size="8" font-weight="700" fill="#FFD3A0" font-family="sans-serif">z</text>`;
+    else if (worried) face = `<circle cx="54" cy="${cy - 4}" r="2.8" fill="${INK}"/><circle cx="66" cy="${cy - 4}" r="2.8" fill="${INK}"/><path d="M49 ${cy - 11} l8 3 M71 ${cy - 11} l-8 3" stroke="${INK}" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="${cy + 5}" rx="3.2" ry="2.3" fill="${INK}"/><path d="M80 ${cy - 14} q4 7 0 9 q-4 -2 0 -9z" fill="#9CC9EA"/>`;
+    else if (low) face = `<path d="M50 ${cy - 6} q4 -3 8 0 M62 ${cy - 6} q4 -3 8 0" stroke="${INK}" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M54 ${cy + 4} q6 -4 12 0" stroke="${INK}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`;
+    else face = `<path d="M49 ${cy - 4} q5 -6 10 0 M61 ${cy - 4} q5 -6 10 0" stroke="${INK}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M53 ${cy + 3} q7 6 14 0" stroke="${INK}" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="46" cy="${cy + 2}" r="3" fill="#FF8E5E" opacity=".6"/><circle cx="74" cy="${cy + 2}" r="3" fill="#FF8E5E" opacity=".6"/>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="${size}" height="${size}" role="img" aria-label="Sore ${mood}">
+      <defs><clipPath id="sore-sky-${mood}"><rect x="0" y="0" width="120" height="86"/></clipPath><radialGradient id="sore-g-${mood}"><stop offset="0" stop-color="${sun}"/><stop offset="1" stop-color="${sun2}"/></radialGradient></defs>
+      <ellipse cx="60" cy="112" rx="30" ry="5" fill="#000" opacity=".25"/>
+      <g clip-path="url(#sore-sky-${mood})">
+        <circle cx="60" cy="${cy}" r="36" fill="${glow}" opacity=".25"/>
+        ${rays}
+        <circle cx="60" cy="${cy}" r="26" fill="url(#sore-g-${mood})"/>
+        ${face}
+      </g>
+      <path d="M10 86 Q 60 80, 110 86 L 110 106 Q 60 112, 10 106 Z" fill="${sea}"/>
+      <path d="M10 86 Q 60 80, 110 86" stroke="${horizon}" stroke-width="3" fill="none"/>
+      <path d="M30 94 q8 -3 16 0 M74 96 q8 -3 16 0" stroke="${glow}" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+    </svg>`;
+  }
 
   // ---------- palet ----------
   const BASE_LIGHT = {
@@ -266,6 +295,17 @@
   };
 
   const THEMES = [
+    {
+      id: 'sore', mark: MARKS.sun, kalender: 'Senja', chime: 'lonceng', nama: 'Sore', maskot: 'Sore', Maskot: 'Sore', deskripsi: 'Senja: plum gelap, amber, koral. Matahari kecil yang nungguin jam 16.00.', bold: true,
+      light: { bg: '#201A2B', paper: '#2A2338', ink: '#F8EFE4', muted: '#B1A3AD', line: '#3B3148', hero1: '#4A2C3E', hero2: '#2F2650',
+        primary: '#FFB55A', 'primary-ink': '#3A2200', secondary: '#F08A6A', 'secondary-ink': '#3A160C', tertiary: '#352D45', 'tertiary-ink': '#EADFD6',
+        chip: '#3E2F44', 'chip-ink': '#FFD3A0', 'chip-line': '#5A4560', accent: '#FFC78A', ok: '#9CD67E', warn: '#FF8A80',
+        'done-bg': '#3A4A3A', 'done-ink': '#CFEDB8', 'pending-bg': '#5A3A24', 'pending-ink': '#FFD3A0', 'missed-bg': '#4F2E3C', 'missed-ink': '#FFB0BE',
+        'off-bg': '#2A2435', 'off-ink': '#6E6478', soft: '#302840', shadow: 'rgba(0,0,0,.5)' },
+      dark: { bg: '#17121F', paper: '#201A2B', hero1: '#3A2232', hero2: '#241D40' },
+      flowers: ['#FFB55A', '#F08A6A', '#FFD3A0', '#C98BD6', '#9CD67E'],
+      char: soreSVG, sway: false
+    },
     {
       id: 'simpel', mark: MARKS.check, kalender: 'Kalender', chime: 'marimba', nama: 'Simpel', maskot: 'aku', Maskot: 'Aku', deskripsi: 'Bersih dan netral, tanpa maskot. Abu hangat dengan aksen biru-abu.',
       light: { bg: '#F4F4F2', paper: '#FFFFFF', ink: '#2E3340', muted: '#7C8491', line: '#E3E5E9', hero1: '#ECEDEF', hero2: '#F4F4F2',
