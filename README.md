@@ -10,20 +10,21 @@ Pengingat absensi MagangHub yang nggak bisa dicuekin, plus laporan harian yang d
 
 ## Web
 
-## Jalankan (mode lokal, tanpa Supabase)
+## Jalankan
+
+Semua lewat Supabase: autentikasi, data, dan admin. Tidak ada mode lokal.
+
+1. Buat project Supabase sendiri, jalankan `supabase/schema.sql` di SQL Editor (sekali).
+2. Salin `.env.example` ke `.env.local`, isi `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, dan `OPENAI_API_KEY`.
+3. Di Supabase > Authentication > Providers > Email: kalau "Confirm email" dibiarkan aktif, pendaftar harus klik tautan di email dulu (halaman daftar sudah menanganinya). Matikan kalau mau langsung masuk.
 
 ```bash
 npm install
+npm run admin -- email@kamu.id kata-sandi-kuat   # admin pertama: buat user Supabase Auth + role admin
 npm run shots     # sekali: screenshot ekstensi asli ke public/shots (butuh: npx playwright install chromium)
 npm run dev       # http://localhost:3000
+npm run verify    # uji end-to-end ke Supabase: login, trial, aktivasi, generate, admin, dashboard
 ```
-
-Mode lokal menyimpan data di `.data/db.json` (dibuat otomatis, berisi akun contoh):
-
-| Akun | Email | Sandi | Peran |
-|---|---|---|---|
-| Admin | admin@absenin.local | admin123 | admin |
-| Demo | demo@absenin.local | demo123 | user, punya lisensi pro |
 
 Tanpa `OPENAI_API_KEY`, endpoint generate memakai template cadangan dan menandainya `offline`, jadi seluruh alur bisa dites tanpa biaya.
 
@@ -49,12 +50,9 @@ Tanpa `OPENAI_API_KEY`, endpoint generate memakai template cadangan dan menandai
 
 Kunci OpenAI hanya ada di env server. Ekstensi memegang kode lisensi saja.
 
-## Pindah ke Supabase (project kamu sendiri)
+## Peran admin
 
-1. Buat project Supabase, jalankan `supabase/schema.sql` di SQL Editor.
-2. Salin `.env.example` ke `.env.local`, isi `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `OPENAI_API_KEY`, `APP_SECRET`.
-3. Daftar lewat `/daftar` (Supabase Auth), lalu jadikan admin: `update public.profiles set role = 'admin' where email = '...'`.
-4. Data layer otomatis berpindah ke Supabase begitu env terisi (`src/lib/db/index.ts`).
+Admin adalah user Supabase Auth biasa yang `profiles.role = 'admin'`. Cara menambah: `npm run admin -- email@kamu.id` (user sudah ada) atau lewat halaman admin > Pengguna > "Jadikan admin". Server membaca profil lewat service role; halaman admin dan API admin menolak selain role admin.
 
 ## Keamanan dan operasional
 
@@ -79,7 +77,8 @@ Kunci OpenAI hanya ada di env server. Ekstensi memegang kode lisensi saja.
 | `npm run shots` | Screenshot ekstensi asli dengan Playwright (popup, splash, pengaturan, panel di halaman MagangHub tiruan) |
 | `npm run pack` | Bungkus `extension/` ke `public/downloads/absenin.zip` dan sinkron `extension/shared` ke `public/ext` (otomatis saat build) |
 | `npm run demo` | Rekam video demo `public/demo.webm` dari ekstensi asli (layar pembuka, panel, generate, isi form); butuh dev server jalan |
-| `node scripts/verify.mjs` | Uji alur daftar, trial, aktivasi, generate, lisensi salah, lalu screenshot landing, admin, dashboard ke `.verify/` |
+| `npm run verify` | Buat user tes terkonfirmasi di Supabase, uji login, trial, aktivasi, generate, lisensi salah, screenshot landing/admin/dashboard ke `.verify/`, lalu bersihkan |
+| `npm run admin -- email [sandi]` | Buat atau naikkan user Supabase Auth jadi admin |
 
 ## Yang belum
 
