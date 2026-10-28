@@ -10,7 +10,9 @@
     "shots": "node scripts/shoot-extension.mjs",
     "pack": "node scripts/pack-extension.mjs",
     "prebuild": "node scripts/pack-extension.mjs",
-    "demo": "node scripts/record-demo.mjs"
+    "demo": "node scripts/record-demo.mjs",
+    "admin": "node scripts/make-admin.mjs",
+    "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
