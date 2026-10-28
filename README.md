@@ -163,6 +163,14 @@ Semua skrip punya pemeriksaan awal: kalau skema Supabase belum dipasang, pesanny
 | `/blog` | Artikel panduan laporan MagangHub (pintu masuk SEO) |
 | `/syarat`, `/privasi` | Syarat layanan, refund 7 hari, kebijakan privasi |
 
+**Dashboard pengguna.** Kode lisensi disembunyikan sebagian, kuota hari ini, perangkat yang terikat, dan tiga langkah pasang.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+**Admin.** KPI, grafik generate 14 hari, buat lisensi, tabel lisensi dengan aksi, pengguna, log, telemetri, beta tester, dan konfigurasi jarak jauh.
+
+![Admin](docs/screenshots/admin.png)
+
 ![Blog](docs/screenshots/blog.png)
 
 ## Arsitektur
