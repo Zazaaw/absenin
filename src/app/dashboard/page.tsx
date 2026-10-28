@@ -31,7 +31,7 @@ export default async function DashboardPage() {
 
         {recentDeviceChange && (
           <div className="mb-6 rounded-xl border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-body-sm text-amber-600 dark:text-amber-400">
-            Lisensimu diaktifkan di perangkat lain pada {new Date(recentDeviceChange.createdAt).toLocaleString("id-ID")} ({recentDeviceChange.detail}). Kalau itu bukan kamu, hubungi halo@magangdiary.id supaya kodenya diganti.
+            Lisensimu diaktifkan di perangkat lain pada {new Date(recentDeviceChange.createdAt).toLocaleString("id-ID")} ({recentDeviceChange.detail}). Kalau itu bukan kamu, hubungi halo@absenin.id supaya kodenya diganti.
           </div>
         )}
         {primary ? <LicenseCard license={primary} usedToday={usedToday} /> : <TrialButton />}
@@ -41,7 +41,7 @@ export default async function DashboardPage() {
             <h2 className="text-h5 font-bold tracking-tight">Cara pasang</h2>
             <ol className="grid gap-4 sm:grid-cols-3">
               {[
-                { icon: Download, t: "Unduh ekstensi", d: "Ekstrak zip-nya ke folder yang nggak bakal kamu hapus." , cta: <Button asChild size="sm" variant="outline" className="mt-3"><a href="/downloads/magang-diary.zip">Unduh zip</a></Button> },
+                { icon: Download, t: "Unduh ekstensi", d: "Ekstrak zip-nya ke folder yang nggak bakal kamu hapus." , cta: <Button asChild size="sm" variant="outline" className="mt-3"><a href="/downloads/absenin.zip">Unduh zip</a></Button> },
                 { icon: Puzzle, t: "Load unpacked", d: "Buka chrome://extensions, nyalakan Developer mode, klik Load unpacked, pilih foldernya." },
                 { icon: KeyRound, t: "Tempel kode lisensi", d: "Klik ikon ekstensi, Pengaturan, bagian Akun. Tempel kode di atas, klik Aktifkan." },
               ].map((s, i) => (

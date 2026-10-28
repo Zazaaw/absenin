@@ -101,7 +101,7 @@ export function Features() {
 
 export function ShotsParallax() {
   const cols = [
-    { speed: 0.25, shots: [["popup-simpel", 840, 1200], ["popup-robo", 840, 1200]] },
+    { speed: 0.25, shots: [["popup-sore", 840, 1200], ["popup-robo", 840, 1200]] },
     { speed: -0.15, shots: [["options-bara", 1536, 900], ["panel-astro", 1200, 900]] },
     { speed: 0.35, shots: [["popup-harimau", 840, 1200], ["popup-astro", 840, 1200]] },
   ] as const;

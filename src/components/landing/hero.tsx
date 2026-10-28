@@ -123,17 +123,17 @@ export function Hero() {
               <span className="ml-3 flex-1 rounded-md bg-muted px-2 py-0.5 text-overline text-muted-foreground">monev.maganghub.kemnaker.go.id/dashboard/riwayat</span>
               <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-overline font-bold uppercase text-emerald-500">rekaman asli</span>
             </div>
-            <video className="block w-full" autoPlay muted loop playsInline poster="/shots/panel-bara.png" aria-label="Demo Magang Diary: layar pembuka, panel cerita, generate, isi ke form">
+            <video className="block w-full" autoPlay muted loop playsInline poster="/shots/panel-bara.png" aria-label="Demo Absenin: layar pembuka, panel cerita, generate, isi ke form">
               <source src="/demo.webm" type="video/webm" />
             </video>
           </div>
 
           {/* kartu melayang: data-depth menentukan seberapa jauh ikut mouse */}
           <div data-depth="1.6" className="float absolute -left-10 top-10 hidden w-[230px] overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xl will-change-transform lg:block dark:border-neutral-800 dark:bg-neutral-900">
-            <Shot name="popup-bara" alt="Popup Magang Diary tema Bara" width={840} height={1200} className="w-full" />
+            <Shot name="popup-sore" alt="Popup Absenin tema Sore" width={840} height={1200} className="w-full" />
           </div>
           <div data-depth="1.1" className="float absolute -right-8 -top-8 hidden items-center gap-3 rounded-2xl border border-neutral-200 bg-white/90 p-4 shadow-xl backdrop-blur will-change-transform lg:flex dark:border-neutral-800 dark:bg-neutral-900/90">
-            <Mascot themeId="bara" size={56} />
+            <Mascot themeId="sore" size={56} />
             <Countdown />
           </div>
           <div data-depth="2" className="float absolute -right-6 bottom-16 hidden rounded-2xl border border-neutral-200 bg-white/90 p-4 shadow-xl backdrop-blur will-change-transform lg:block dark:border-neutral-800 dark:bg-neutral-900/90">

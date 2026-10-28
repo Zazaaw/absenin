@@ -36,7 +36,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
                 <p className="font-semibold text-amber-600 dark:text-amber-400">Pembayaran otomatis belum tersambung.</p>
                 <p className="mt-2 text-body-sm text-muted-foreground">Gerbang pembayaran (Midtrans atau Xendit) dipasang setelah project Supabase siap. Sementara ini, aktivasi dilakukan manual oleh admin setelah transfer.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <Button asChild><a href={`mailto:halo@magangdiary.id?subject=Aktivasi%20${plan.nama}&body=Email%20akun:%20${encodeURIComponent(user.email)}`}>Minta aktivasi lewat email</a></Button>
+                  <Button asChild><a href={`mailto:halo@absenin.id?subject=Aktivasi%20${plan.nama}&body=Email%20akun:%20${encodeURIComponent(user.email)}`}>Minta aktivasi lewat email</a></Button>
                   <Button asChild variant="outline"><Link href="/dashboard">Kembali ke dashboard</Link></Button>
                 </div>
               </div>

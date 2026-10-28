@@ -22,7 +22,7 @@ type Pal = Record<string, string>;
  * warna latar/palet di-tween (bukan transition CSS), maskot masuk dengan spring (back.out),
  * partikel ikon kalender melayang berulang, kalender mini muncul berurutan, tombol maskot membesar.
  */
-export function ThemeShowcase({ initial = "bara" }: { initial?: string }) {
+export function ThemeShowcase({ initial = "sore" }: { initial?: string }) {
   const themes = useThemes();
   const [id, setId] = useState(initial);
   const [mood, setMood] = useState("happy");

@@ -36,7 +36,7 @@ async function seed(): Promise<Store> {
   };
   const demo: User = {
     id: randomUUID(),
-    email: "demo@magangdiary.local",
+    email: "demo@absenin.local",
     name: "Peserta Demo",
     role: "user",
     createdAt: new Date(now.getTime() - 12 * 86400000).toISOString(),

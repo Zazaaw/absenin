@@ -23,7 +23,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="h-2.5 w-2.5 rounded-full bg-background" />
         <span className="absolute inset-0 rounded-lg bg-foreground/40 animate-pulse-ring" />
       </span>
-      Magang Diary
+      Absenin
     </Link>
   );
 }

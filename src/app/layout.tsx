@@ -10,13 +10,13 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakart
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["italic"], variable: "--font-serif-accent", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "Magang Diary: pengingat absensi dan laporan harian MagangHub", template: "%s · Magang Diary" },
+  title: { default: "Absenin: pengingat absensi dan laporan harian MagangHub", template: "%s · Absenin" },
   description: "Ekstensi Chrome yang mengingatkan laporan harian MagangHub jam 16.00 dan merangkai uraian aktivitas, pembelajaran, dan kendala dari cerita singkatmu. Tombol kirim tetap kamu yang tekan. Trial 7 hari gratis.",
   keywords: ["MagangHub", "laporan harian MagangHub", "cara mengisi laporan MagangHub", "absensi MagangHub", "uraian aktivitas magang", "pengingat laporan magang", "ekstensi Chrome magang", "Kemnaker magang"],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   alternates: { canonical: "/" },
-  openGraph: { title: "Magang Diary: laporan MagangHub selesai sebelum kamu lupa", description: "Pengingat jam 16.00 yang nggak bisa dicuekin, plus tiga kolom laporan dirangkai dari cerita singkatmu.", type: "website", locale: "id_ID", siteName: "Magang Diary" },
-  twitter: { card: "summary_large_image", title: "Magang Diary", description: "Laporan MagangHub selesai sebelum kamu lupa." },
+  openGraph: { title: "Absenin: laporan MagangHub selesai sebelum kamu lupa", description: "Pengingat jam 16.00 yang nggak bisa dicuekin, plus tiga kolom laporan dirangkai dari cerita singkatmu.", type: "website", locale: "id_ID", siteName: "Absenin" },
+  twitter: { card: "summary_large_image", title: "Absenin", description: "Laporan MagangHub selesai sebelum kamu lupa." },
   robots: { index: true, follow: true },
 };
 

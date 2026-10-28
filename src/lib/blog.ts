@@ -33,7 +33,7 @@ export const POSTS: Post[] = [
       { h: "Supaya nggak pernah telat lagi", p: [
         "Pasang pengingat di jam yang sama setiap hari kerja, sebelum pulang, misalnya 16.00. Bukan alarm biasa yang gampang di-swipe, tapi sesuatu yang membuka halaman MagangHub-nya langsung.",
         "Catat kegiatan sepanjang hari dalam satu baris: 'benerin bug login, meeting mentor soal deploy'. Sore tinggal dikembangkan jadi tiga paragraf.",
-        "Kalau mau dibantu: Magang Diary adalah ekstensi Chrome yang jam 16.00 membawa Chrome ke depan, membuka halaman Riwayat MagangHub, lalu merangkai tiga kolom dari satu baris cerita yang kamu tulis. Tombol Simpan dan Kirim tetap kamu yang tekan, jadi kamu tetap membaca dan bertanggung jawab atas isinya. Tujuh hari pertama gratis.",
+        "Kalau mau dibantu: Absenin adalah ekstensi Chrome yang jam 16.00 membawa Chrome ke depan, membuka halaman Riwayat MagangHub, lalu merangkai tiga kolom dari satu baris cerita yang kamu tulis. Tombol Simpan dan Kirim tetap kamu yang tekan, jadi kamu tetap membaca dan bertanggung jawab atas isinya. Tujuh hari pertama gratis.",
       ] },
     ],
     faq: [

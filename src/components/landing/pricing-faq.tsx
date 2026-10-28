@@ -34,7 +34,7 @@ export function Pricing() {
                 {p.fitur.map((f) => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 size-4 shrink-0 text-emerald-500" /><span>{f}</span></li>)}
               </ul>
               <Button asChild className="mt-8 rounded-full" variant={p.featured ? "default" : "outline"}>
-                <Link href={p.id === "tim" ? "mailto:halo@magangdiary.id?subject=Paket%20Tim" : `/daftar?plan=${p.id}`}>{p.cta}</Link>
+                <Link href={p.id === "tim" ? "mailto:halo@absenin.id?subject=Paket%20Tim" : `/daftar?plan=${p.id}`}>{p.cta}</Link>
               </Button>
             </div>
           );
@@ -115,7 +115,7 @@ export function Footer() {
   return (
     <footer className="border-t px-6 py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-caption text-muted-foreground md:flex-row">
-        <p>© {new Date().getFullYear()} Magang Diary. Bukan produk resmi Kemnaker atau MagangHub. Cuma teman kecil di pojok kanan bawah.</p>
+        <p>© {new Date().getFullYear()} Absenin. Bukan produk resmi Kemnaker atau MagangHub. Cuma teman kecil di pojok kanan bawah.</p>
         <div className="flex gap-5">
           <Link href="/blog" className="hover:text-foreground">Blog</Link>
           <Link href="/privasi" className="hover:text-foreground">Privasi</Link>

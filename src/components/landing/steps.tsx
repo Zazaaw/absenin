@@ -12,7 +12,7 @@ const STEPS = [
     n: "01", icon: AlarmClock, title: "Jam pengingat tiba",
     desc: "Chrome dibawa ke depan dan fullscreen. Layar pembuka muncul: maskot tumbuh, kelopak jatuh, chime lima detik. Empat detik kemudian halaman Riwayat MagangHub kebuka.",
     bullets: ["Nggak kaget, nggak kelewat", "Ngulang tiap 10 menit sampai beres", "Tunda kalau lagi meeting"],
-    shot: "splash-bara", w: 1366, h: 768, pos: "object-center", mascot: "bara", mood: "worried",
+    shot: "splash-sore", w: 1366, h: 768, pos: "object-center", mascot: "sore", mood: "worried",
   },
   {
     n: "02", icon: MessageSquareText, title: "Ceritain dikit",
@@ -70,7 +70,7 @@ export function Steps() {
                 </ul>
                 <div className="mt-8 flex items-center gap-3 text-caption text-muted-foreground">
                   <Mascot themeId={s.mascot} mood={s.mood} size={40} />
-                  <span>{i === 0 ? "Bara mulai gelisah. Wajar, jam 16.00." : i === 1 ? "Robo nunggu satu baris aja." : "Astro lega. Besok ketemu lagi."}</span>
+                  <span>{i === 0 ? "Sore mulai gelisah. Wajar, jam 16.00." : i === 1 ? "Robo nunggu satu baris aja." : "Astro lega. Besok ketemu lagi."}</span>
                 </div>
                 <span aria-hidden className="pointer-events-none absolute -bottom-6 -left-2 select-none text-[10rem] font-extrabold leading-none text-foreground/[0.04]">{s.n}</span>
               </div>

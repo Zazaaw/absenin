@@ -1,4 +1,4 @@
--- Magang Diary: skema untuk project Supabase kamu sendiri.
+-- Absenin: skema untuk project Supabase kamu sendiri.
 -- Jalankan di SQL Editor. Setelah itu isi env NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 
 create extension if not exists pgcrypto;

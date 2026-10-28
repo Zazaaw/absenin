@@ -58,7 +58,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
             {mode === "login" ? <>Belum punya akun? <Link href="/daftar" className="font-semibold text-foreground underline-offset-4 hover:underline">Daftar</Link></> : <>Sudah punya akun? <Link href="/login" className="font-semibold text-foreground underline-offset-4 hover:underline">Masuk</Link></>}
           </p>
         </form>
-        <p className="mt-4 text-center text-overline uppercase text-muted-foreground">Mode lokal: admin@magangdiary.local / admin123 · demo@magangdiary.local / demo123</p>
+        <p className="mt-4 text-center text-overline uppercase text-muted-foreground">Mode lokal: admin@absenin.local / admin123 · demo@absenin.local / demo123</p>
       </BlurFade>
     </div>
   );

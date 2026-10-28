@@ -25,7 +25,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
   const base = env.siteUrl.replace(/\/$/, "");
   const jsonLd = [
-    { "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.description, datePublished: post.date, author: { "@type": "Organization", name: "Magang Diary" }, publisher: { "@type": "Organization", name: "Magang Diary" }, mainEntityOfPage: `${base}/blog/${post.slug}`, inLanguage: "id-ID" },
+    { "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.description, datePublished: post.date, author: { "@type": "Organization", name: "Absenin" }, publisher: { "@type": "Organization", name: "Absenin" }, mainEntityOfPage: `${base}/blog/${post.slug}`, inLanguage: "id-ID" },
     post.faq && { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: post.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
   ].filter(Boolean);
   return (
@@ -56,7 +56,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
             <div className="mt-12 rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-800 dark:bg-neutral-900/50">
               <p className="text-h5 font-bold tracking-tight">Mau diingetin jam 16.00 dan dibantu nulis tiga kolomnya?</p>
-              <p className="mt-2 text-body-sm text-muted-foreground">Magang Diary, ekstensi Chrome. Trial 7 hari, tanpa kartu. Tombol kirim tetap kamu yang tekan.</p>
+              <p className="mt-2 text-body-sm text-muted-foreground">Absenin, ekstensi Chrome. Trial 7 hari, tanpa kartu. Tombol kirim tetap kamu yang tekan.</p>
               <div className="mt-4 flex gap-2"><Button asChild><Link href="/daftar">Coba gratis</Link></Button><Button asChild variant="outline"><Link href="/#cara">Lihat cara kerjanya</Link></Button></div>
             </div>
           </article>

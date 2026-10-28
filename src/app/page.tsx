@@ -17,7 +17,7 @@ export default async function Home() {
   const user = await getSessionUser();
   const base = env.siteUrl.replace(/\/$/, "");
   const jsonLd = [
-    { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Magang Diary", applicationCategory: "BrowserApplication", operatingSystem: "Chrome", description: "Pengingat absensi MagangHub dan generator laporan harian dari cerita singkat.", url: base, offers: PLANS.map((p) => ({ "@type": "Offer", name: p.nama, price: p.harga.replace(/[^0-9]/g, "") || "0", priceCurrency: "IDR" })), inLanguage: "id-ID" },
+    { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Absenin", applicationCategory: "BrowserApplication", operatingSystem: "Chrome", description: "Pengingat absensi MagangHub dan generator laporan harian dari cerita singkat.", url: base, offers: PLANS.map((p) => ({ "@type": "Offer", name: p.nama, price: p.harga.replace(/[^0-9]/g, "") || "0", priceCurrency: "IDR" })), inLanguage: "id-ID" },
     { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
   ];
   return (

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Magang Diary: laporan MagangHub selesai sebelum kamu lupa";
+export const alt = "Absenin: laporan MagangHub selesai sebelum kamu lupa";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,7 +14,7 @@ export default function OG() {
           <div style={{ width: 40, height: 40, borderRadius: 12, background: "#111318", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 14, height: 14, borderRadius: 99, background: "#F4F4F2" }} />
           </div>
-          Magang Diary
+          Absenin
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.02, letterSpacing: -3 }}>Laporan MagangHub selesai sebelum kamu lupa.</div>
