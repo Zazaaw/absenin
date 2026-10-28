@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Copy, Check, Eye, EyeOff, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusPill } from "./shell";
+import { licenseView } from "@/lib/license-kind";
 import type { License } from "@/lib/db";
 
 function fmt(d: string) { return new Date(d).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }); }
@@ -12,10 +13,8 @@ function fmt(d: string) { return new Date(d).toLocaleDateString("id-ID", { day: 
 export function LicenseCard({ license, usedToday }: { license: License; usedToday: number }) {
   const [show, setShow] = useState(false);
   const [copied, setCopied] = useState(false);
-  const expired = Date.parse(license.expiresAt) < Date.now();
-  const kind = license.status === "revoked" ? "revoked" : expired ? "expired" : license.plan === "trial" ? "trial" : "active";
-  const label = license.status === "revoked" ? "Dicabut" : expired ? "Kedaluwarsa" : license.plan === "trial" ? "Trial" : "Aktif";
-  const daysLeft = Math.max(0, Math.ceil((Date.parse(license.expiresAt) - Date.now()) / 86400000));
+  const { kind, expired, daysLeft } = licenseView(license);
+  const label = kind === "revoked" ? "Dicabut" : expired ? "Kedaluwarsa" : kind === "trial" ? "Trial" : "Aktif";
   const pct = Math.min(100, Math.round((usedToday / license.dailyQuota) * 100));
   async function copy() { await navigator.clipboard.writeText(license.key); setCopied(true); setTimeout(() => setCopied(false), 1500); }
   return (

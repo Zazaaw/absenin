@@ -12,7 +12,8 @@
     "prebuild": "node scripts/pack-extension.mjs",
     "demo": "node scripts/record-demo.mjs",
     "admin": "node scripts/make-admin.mjs",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "shots:admin": "node scripts/shoot-admin.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

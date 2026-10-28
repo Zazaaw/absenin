@@ -144,6 +144,7 @@ npm run verify                                  # uji end-to-end: login, trial, 
 |---|---|
 | `npm run dev` / `build` / `start` | Next.js |
 | `npm run admin -- email [sandi]` | Buat atau naikkan user Supabase Auth jadi admin |
+| `npm run shots:admin` | Screenshot dashboard dan semua halaman admin dengan data contoh (dibersihkan lagi) |
 | `npm run verify` | Buat user tes terkonfirmasi, uji seluruh alur, screenshot ke `.verify/`, bersihkan |
 | `npm run shots` | Screenshot ekstensi asli (Chromium + ekstensi unpacked + halaman MagangHub tiruan) ke `public/shots` |
 | `npm run demo` | Rekam video demo `public/demo.webm` dari ekstensi asli |
@@ -158,18 +159,38 @@ Semua skrip punya pemeriksaan awal: kalau skema Supabase belum dipasang, pesanny
 | `/` | Landing: hero dengan video demo asli, fitur, cara kerja (kartu bertumpuk), galeri tema horizontal, panggung tema interaktif, harga, beta tester, FAQ |
 | `/daftar`, `/login` | Supabase Auth |
 | `/dashboard` | Kode lisensi (sembunyi/salin), kuota harian, perangkat, aktivasi trial, cara pasang, pemakaian terakhir, peringatan pindah perangkat |
-| `/admin` | KPI, grafik 14 hari, buat lisensi, tabel lisensi (perpanjang, lepas perangkat, cabut), pengguna dan role, log pemakaian, telemetri ekstensi, pendaftar beta, konfigurasi jarak jauh (model, kuota, pengumuman, versi minimum, instruksi AI) |
+| `/admin` | Ringkasan: KPI, grafik 14 hari, peringatan lisensi hampir habis dan pendaftar beta |
+| `/admin/lisensi`, `/admin/lisensi/baru` | Daftar lisensi dengan filter dan aksi (perpanjang, lepas perangkat, cabut); form buat lisensi bertahap dengan ringkasan sebelum dibuat |
+| `/admin/pengguna` | Akun dan peran, jumlah lisensi per orang |
+| `/admin/laporan` | Sinyal telemetri ekstensi, pendaftar beta, log pemakaian |
+| `/admin/konfigurasi` | Konfigurasi jarak jauh: trial, kuota, model, batas cerita, instruksi AI, pengumuman, versi minimum |
 | `/checkout` | Placeholder pembayaran |
 | `/blog` | Artikel panduan laporan MagangHub (pintu masuk SEO) |
 | `/syarat`, `/privasi` | Syarat layanan, refund 7 hari, kebijakan privasi |
+
+Dashboard dan admin memakai layout sidebar yang sama.
 
 **Dashboard pengguna.** Kode lisensi disembunyikan sebagian, kuota hari ini, perangkat yang terikat, dan tiga langkah pasang.
 
 ![Dashboard](docs/screenshots/dashboard.png)
 
-**Admin.** KPI, grafik generate 14 hari, buat lisensi, tabel lisensi dengan aksi, pengguna, log, telemetri, beta tester, dan konfigurasi jarak jauh.
+**Ringkasan admin.** KPI dengan keterangan, grafik generate 14 hari, peringatan yang perlu ditindak, laporan ekstensi, dan pemakaian terakhir.
 
-![Admin](docs/screenshots/admin.png)
+| Terang | Gelap |
+|---|---|
+| ![Admin](docs/screenshots/admin.png) | ![Admin gelap](docs/screenshots/admin-dark.png) |
+
+**Buat lisensi.** Pilih paket, email pembeli, masa berlaku, dan jatah generate dengan penjelasan di tiap langkah. Ringkasan di kanan menunjukkan apa yang akan dibuat; setelah jadi, kode dan pesan untuk pembeli bisa disalin sekali klik.
+
+![Buat lisensi](docs/screenshots/admin-lisensi-baru.png)
+
+**Daftar lisensi.** Filter status dengan jumlah, pencarian, sisa hari, perangkat, dan aksi per baris.
+
+![Daftar lisensi](docs/screenshots/admin-lisensi.png)
+
+**Konfigurasi.** Tiap setelan punya penjelasan dan satuan; tombol simpan baru aktif kalau ada perubahan.
+
+![Konfigurasi](docs/screenshots/admin-konfigurasi.png)
 
 ![Blog](docs/screenshots/blog.png)
 

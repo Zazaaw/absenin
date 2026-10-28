@@ -8,6 +8,7 @@ import { AppShell } from "@/components/app/shell";
 import { LicenseCard, TrialButton } from "@/components/app/license-card";
 import { getSessionUser } from "@/lib/auth";
 import { getDb } from "@/lib/db";
+import { withinLastDays } from "@/lib/license-kind";
 
 export const metadata = { title: "Dashboard" };
 export const dynamic = "force-dynamic";
@@ -21,10 +22,10 @@ export default async function DashboardPage() {
   const usedToday = primary ? await db.countUsageToday(primary.id) : 0;
   const usage = primary ? await db.listUsage({ licenseId: primary.id, limit: 12 }) : [];
   const cfg = await db.getConfig();
-  const recentDeviceChange = primary ? (await db.listTelemetry(200)).find((t) => t.licenseId === primary.id && t.event === "device-change" && Date.now() - Date.parse(t.createdAt) < 7 * 86400000) : null;
+  const recentDeviceChange = primary ? (await db.listTelemetry(200)).find((t) => t.licenseId === primary.id && t.event === "device-change" && withinLastDays(t.createdAt, 7)) : null;
 
   return (
-    <AppShell admin={user.role === "admin"} email={user.email}>
+    <AppShell admin={user.role === "admin"} email={user.email} name={user.name}>
       <BlurFade>
         <PageHeader title={`Halo, ${user.name || user.email.split("@")[0]}`} subtitle="Lisensi, pemakaian, dan cara pasang ekstensinya." action={primary && <Button asChild variant="outline"><Link href="/checkout?plan=pro">Perpanjang</Link></Button>} />
         {cfg.announcement && <div className="mb-6 rounded-xl border border-blue-500/20 bg-blue-500/10 px-4 py-3 text-body-sm text-blue-500">{cfg.announcement}</div>}
