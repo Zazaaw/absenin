@@ -105,19 +105,22 @@ async function main() {
     await page.setViewportSize({ width: 1280, height: 860 });
   }
 
+  await shotPopup("popup-sore", "sore");
   await shotPopup("popup-bara", "bara");
   await shotPopup("popup-simpel", "simpel");
   await shotPopup("popup-robo", "robo");
   await shotPopup("popup-astro", "astro", true);
   await shotPopup("popup-harimau", "harimau", true);
   await shotPopup("popup-hiu", "hiu");
+  await shotSplash("splash-sore", "sore");
   await shotSplash("splash-hiu", "hiu");
   await shotSplash("splash-bara", "bara");
   await shotSplash("splash-robo", "robo", "nag");
+  await shotOptions("options-sore", "sore");
   await shotOptions("options-bara", "bara");
   await shotOptions("options-simpel", "simpel");
   // panduan pertama kali
-  await setSettings({ theme: "bara", nightMode: "off" });
+  await setSettings({ theme: "sore", nightMode: "off" });
   await page.setViewportSize({ width: 1100, height: 820 });
   await page.goto(extUrl("onboarding/onboarding.html"));
   await page.waitForTimeout(900);

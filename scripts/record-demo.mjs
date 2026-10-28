@@ -16,10 +16,10 @@ const SITE = "https://monev.maganghub.kemnaker.go.id/dashboard/riwayat";
 
 // lisensi sementara untuk demo, dibuat lewat jalur admin (tidak kena pembatas laju trial)
 async function makeLicense() {
-  const login = await fetch(BASE + "/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: process.env.ADMIN_EMAIL || "admin@magangdiary.local", password: process.env.ADMIN_PASSWORD || "admin123" }) });
+  const login = await fetch(BASE + "/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: process.env.ADMIN_EMAIL || "admin@absenin.local", password: process.env.ADMIN_PASSWORD || "admin123" }) });
   if (!login.ok) throw new Error("login admin gagal: " + (await login.text()));
   const cookie = (login.headers.get("set-cookie") || "").split(";")[0];
-  const r = await fetch(BASE + "/api/admin/licenses", { method: "POST", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ email: `demo-video-${Date.now()}@magangdiary.local`, plan: "pro", days: 1, dailyQuota: 20, note: "lisensi sementara rekaman demo" }) });
+  const r = await fetch(BASE + "/api/admin/licenses", { method: "POST", headers: { "Content-Type": "application/json", cookie }, body: JSON.stringify({ email: `demo-video-${Date.now()}@absenin.local`, plan: "pro", days: 1, dailyQuota: 20, note: "lisensi sementara rekaman demo" }) });
   const j = await r.json();
   if (!j.license?.key) throw new Error("buat lisensi gagal: " + JSON.stringify(j));
   return j.license.key;
@@ -42,7 +42,7 @@ for (const p of ctx.pages()) if (p.url().includes("onboarding")) await p.close()
 const page = ctx.pages()[0] || (await ctx.newPage());
 await page.goto(`chrome-extension://${extId}/options/options.html`);
 await page.evaluate(async ({ key, BASE }) => {
-  await chrome.storage.local.set({ settings: { hour: 16, minute: 0, nickname: "Wak", theme: "bara", nightMode: "off", sound: false, mode: "lisensi", apiBase: BASE, historyHints: false, telemetry: false }, onboarded: true, licenseKey: key, installedAt: "2026-10-01", history: {} });
+  await chrome.storage.local.set({ settings: { hour: 16, minute: 0, nickname: "Wak", theme: "sore", nightMode: "off", sound: false, mode: "lisensi", apiBase: BASE, historyHints: false, telemetry: false }, onboarded: true, licenseKey: key, installedAt: "2026-10-01", history: {} });
 }, { key, BASE });
 
 // 1. layar pembuka (4 detik)
