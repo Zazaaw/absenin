@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import { localRegister, SESSION_COOKIE } from "@/lib/auth";
-import { env, isSupabaseMode } from "@/lib/env";
+import { env } from "@/lib/env";
 import { fail } from "@/lib/api";
 import { clientIp, rateLimit } from "@/lib/ratelimit";
 
@@ -14,19 +13,16 @@ export async function POST(req: Request) {
   if (!email || !password) return fail("Isi email dan kata sandi.", 400);
   if (!setuju) return fail("Centang persetujuan Syarat Layanan dulu.", 400);
 
-  if (isSupabaseMode()) {
-    const res = NextResponse.json({ ok: true });
-    const supabase = createServerClient(env.supabaseUrl, env.supabaseAnonKey, {
-      cookies: { getAll: () => [], setAll: (list) => list.forEach(({ name: n, value, options }) => res.cookies.set(n, value, options)) },
-    });
-    const { error } = await supabase.auth.signUp({ email, password, options: { data: { name } } });
-    if (error) return fail(error.message, 400);
-    return res;
-  }
-
-  const r = await localRegister(email, password, name || email.split("@")[0]);
-  if (!r.ok) return fail(r.error, 400);
-  const res = NextResponse.json({ ok: true, role: r.user.role });
-  res.cookies.set(SESSION_COOKIE, r.token, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 14, secure: process.env.NODE_ENV === "production" });
+  if (password.length < 6) return fail("Kata sandi minimal 6 karakter.", 400);
+  const pending: { name: string; value: string; options: Record<string, unknown> }[] = [];
+  const supabase = createServerClient(env.supabaseUrl, env.supabaseAnonKey, {
+    cookies: { getAll: () => [], setAll: (list) => list.forEach((c) => pending.push(c)) },
+  });
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name: name || email.split("@")[0] } } });
+  if (error) return fail(error.message.includes("already registered") ? "Email sudah terdaftar." : error.message, 400);
+  // Kalau "Confirm email" aktif di Supabase, belum ada sesi: user harus klik tautan di email dulu.
+  const needsConfirm = !data.session;
+  const res = NextResponse.json({ ok: true, role: "user", needsConfirm });
+  pending.forEach(({ name: n, value, options }) => res.cookies.set(n, value, options));
   return res;
 }
