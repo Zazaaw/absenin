@@ -260,7 +260,7 @@ function normalizeFields(obj) {
   return { aktivitas: clean(obj.aktivitas), pembelajaran: clean(obj.pembelajaran), kendala: clean(obj.kendala) };
 }
 
-// ---------- mode lisensi: proxy ke server Magang Diary ----------
+// ---------- mode lisensi: proxy ke server Absenin ----------
 async function getLicense() {
   const { licenseKey, licenseInfo, deviceId } = await chrome.storage.local.get(['licenseKey', 'licenseInfo', 'deviceId']);
   return { key: licenseKey || '', info: licenseInfo || null, deviceId: deviceId || '' };
@@ -449,7 +449,7 @@ async function getState() {
     streak: U.computeStreak(history, settings),
     hasKey: !!key,
     keyHint: key ? '••••' + key.slice(-4) : '',
-    license: await getLicense().then(l => ({ hasKey: !!l.key, keyMasked: l.key ? l.key.replace(/^(MD-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, '$1-••••-$2') : '', info: l.info })),
+    license: await getLicense().then(l => ({ hasKey: !!l.key, keyMasked: l.key ? l.key.replace(/^(AB-[A-Z0-9]{4})-[A-Z0-9]{4}-([A-Z0-9]{4})$/, '$1-••••-$2') : '', info: l.info })),
     version: VERSION,
     updateRequired: !!(((await getLicense()).info) || {}).updateRequired,
     templates: U.allTemplates(settings)

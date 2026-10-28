@@ -1,10 +1,11 @@
-# Magang Diary - Pengingat MagangHub
+# Absenin - Pengingat MagangHub
 
 Ekstensi Chrome yang mengingatkan absensi harian di MagangHub (monev.maganghub.kemnaker.go.id), lalu membantu menulis uraian aktivitas, pembelajaran, dan kendala dari cerita singkat.
 
 ## Tema dan mode malam
 
-- Tema default **Simpel**: netral, tanpa maskot, abu hangat dengan aksen biru-abu.
+- Tema default **Sore**: senja plum gelap, amber, koral; maskot matahari kecil yang nungguin jam 16.00.
+- **Simpel**: netral, tanpa maskot, abu hangat dengan aksen biru-abu.
 - Tema gelap nyaman dengan aksen kontras: **Bara** (arang dan oranye bara), **Robo** (slate dan mint neon), **Astro** (navy pekat dan biru langit), **Baro si beruang** (kayu gelap, hijau daun, madu), **Hiu** (navy dan teal), **Harimau** (hutan gelap dan lime).
 - Tema terang: **Tegas** (hitam dan kuning safety, tanpa maskot), **Sawit**, **Momo si kucing**, **Kaktus** (pastel).
 - Tiap tema punya palet sendiri, versi mode malam, dan karakter dengan empat ekspresi (senang, gelisah, layu, tidur). Teks pengingat ikut nama maskotnya.
@@ -56,7 +57,7 @@ Saat pertama dipasang, tab panduan 4 langkah terbuka: tempel kode lisensi, pilih
 
 Sejak v0.2 ekstensi punya dua mode di Pengaturan > Akun dan lisensi:
 
-- **Lisensi Magang Diary** (bawaan): ekstensi cuma memegang kode lisensi. Generate dikirim ke server (`web/`, lihat `web/README.md`) yang memegang kunci AI, memeriksa kuota harian, dan mencatat pemakaian. Alamat server bawaan `http://localhost:3000`, bisa diubah.
+- **Lisensi Absenin** (bawaan): ekstensi cuma memegang kode lisensi. Generate dikirim ke server (`web/`, lihat `web/README.md`) yang memegang kunci AI, memeriksa kuota harian, dan mencatat pemakaian. Alamat server bawaan `http://localhost:3000`, bisa diubah.
 - **API key OpenAI sendiri** (lanjutan): perilaku lama, kunci disimpan lokal.
 
 Web-nya (landing page, dashboard, admin, API) ada di root repo; folder ini hanya ekstensinya.

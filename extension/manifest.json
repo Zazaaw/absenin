@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Magang Diary - Pengingat MagangHub",
+  "name": "Absenin - Pengingat MagangHub",
   "version": "0.2.0",
   "description": "Pengingat absensi MagangHub yang nggak bisa dicuekin, plus laporan harian dari cerita singkat. 11 tema, mode malam, maskot hidup.",
   "permissions": [
@@ -17,15 +17,15 @@
     "https://api.openai.com/*",
     "http://localhost:3000/*",
     "https://*.vercel.app/*",
-    "https://magangdiary.id/*",
-    "https://*.magangdiary.id/*"
+    "https://absenin.id/*",
+    "https://*.absenin.id/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "Magang Diary",
+    "default_title": "Absenin",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",

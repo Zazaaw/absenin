@@ -142,7 +142,7 @@ function renderLicense(state) {
   } else if (lic.hasKey) {
     hint.textContent = 'Kode tersimpan (' + lic.keyMasked + ') tapi belum terverifikasi. Klik Aktifkan.'; hint.className = 'hint err';
   } else {
-    hint.textContent = 'Belum ada lisensi. Dapatkan di dashboard Magang Diary, lalu tempel di sini.'; hint.className = 'hint';
+    hint.textContent = 'Belum ada lisensi. Dapatkan di dashboard Absenin, lalu tempel di sini.'; hint.className = 'hint';
   }
 }
 document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', () => { settings.mode = $('#modeKey').checked ? 'key' : 'lisensi'; renderLicense({ license: lastState && lastState.license }); }));

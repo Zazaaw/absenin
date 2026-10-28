@@ -2,13 +2,13 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <title>Pengaturan Magang Diary</title>
+  <title>Pengaturan Absenin</title>
   <link rel="stylesheet" href="options.css">
 </head>
 <body>
   <div class="shell">
     <aside class="side">
-      <div class="brand"><div id="avatar"></div><div><b>Magang Diary</b><small id="verText">v0.2.0</small></div></div>
+      <div class="brand"><div id="avatar"></div><div><b>Absenin</b><small id="verText">v0.2.0</small></div></div>
       <nav class="tabs">
         <button class="tab on" data-tab="akun">Akun</button>
         <button class="tab" data-tab="pengingat">Pengingat</button>
@@ -31,11 +31,11 @@
           <div id="boxLisensi">
             <label>Kode lisensi
               <div class="keyrow">
-                <input type="text" id="license" placeholder="MD-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" class="mono">
+                <input type="text" id="license" placeholder="AB-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" class="mono">
                 <button class="btn l" id="activate" type="button">Aktifkan</button>
               </div>
             </label>
-            <div class="hint" id="licenseHint">Belum ada lisensi. Dapatkan di dashboard Magang Diary, lalu tempel di sini.</div>
+            <div class="hint" id="licenseHint">Belum ada lisensi. Dapatkan di dashboard Absenin, lalu tempel di sini.</div>
             <div class="row-links"><a href="#" id="openDash">Buka dashboard</a></div>
           </div>
           <label>Nama panggilan <span class="why">dipakai maskot buat nyapa</span>
@@ -44,7 +44,7 @@
         </div>
         <details class="card soft">
           <summary>Mau pakai API key OpenAI sendiri? (lanjutan)</summary>
-          <label class="check"><input type="radio" name="mode" id="modeLisensi" value="lisensi" checked> Pakai lisensi Magang Diary (disarankan)</label>
+          <label class="check"><input type="radio" name="mode" id="modeLisensi" value="lisensi" checked> Pakai lisensi Absenin (disarankan)</label>
           <label class="check"><input type="radio" name="mode" id="modeKey" value="key"> Pakai API key OpenAI sendiri</label>
           <div id="boxKey">
             <label>API key OpenAI

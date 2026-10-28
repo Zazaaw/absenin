@@ -316,7 +316,7 @@
 
   const fab = document.createElement('button');
   fab.className = 'fab';
-  fab.title = 'Magang Diary';
+  fab.title = 'Absenin';
   fab.innerHTML = '<span class="av"></span><span class="badge"></span>';
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
@@ -456,9 +456,9 @@
       showStep(1);
       setMood('worried');
       $('#sub').textContent = 'Hmm, ada yang nyangkut.';
-      if (r.error === 'NO_KEY') setStatusText('API key OpenAI belum diisi. Klik kanan ikon Magang Diary di toolbar > Options.', 'err');
+      if (r.error === 'NO_KEY') setStatusText('API key OpenAI belum diisi. Klik kanan ikon Absenin di toolbar > Options.', 'err');
       else if (r.error === 'NO_LICENSE') setStatusText('Kode lisensi belum diaktifkan. Buka pengaturan ekstensi > Akun.', 'err');
-      else if (r.code === 'UPDATE_REQUIRED') setStatusText('Ekstensi perlu diperbarui. Unduh versi terbaru di dashboard Magang Diary, lalu Load unpacked ulang.', 'err');
+      else if (r.code === 'UPDATE_REQUIRED') setStatusText('Ekstensi perlu diperbarui. Unduh versi terbaru di dashboard Absenin, lalu Load unpacked ulang.', 'err');
       else setStatusText(r.error || 'Gagal generate.', 'err');
       return;
     }
